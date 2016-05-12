@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Cafegrapp</string>
+    <string name="lbl_btn_login">LOGIN</string>
+    <string name="lbl_email_hint">Email</string>
+    <string name="lbl_password_hint">Password</string>
+    <string name="action_settings">Settings</string>
+    <string name="username_error">Invalid Email</string>
+    <string name="password_error">Invalid Password</string>
+</resources>
