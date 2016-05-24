@@ -4,4 +4,11 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="colorWhite">#FFF</color>
+    <color name="colorBackground">#ffc000</color>
+    <color name="colorTextLogin">#08c680</color>
+    <color name="colorBtnFb">#45629e</color>
+    <color name="colorGrey">#a1a1a1</color>
+    <color name="colorBlack">#000000</color>
+    <color name="colorBgDark">#cd980a</color>
+    <color name="colorFollower">#6cb25c</color>
 </resources>

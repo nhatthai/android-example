@@ -6,6 +6,44 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+
+        <!-- Customize your theme AppBar. -->
+        <item name="android:activatedBackgroundIndicator">@drawable/drawer_item</item>
+        <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
+
+        <item name="android:windowActionModeOverlay">true</item>
+        <item name="android:windowActionBarOverlay">true</item>
+
+    </style>
+
+    <style name="DrawerArrowStyle" parent="Widget.AppCompat.DrawerArrowToggle">
+        <item name="color">@color/colorWhite</item>
+    </style>
+
+    <!-- custom fonts -->
+    <style name="TSFont" />
+    <style name="TSFont.Light">
+        <item name="fontPath">fonts/TitilliumWeb-Light.ttf</item>
+    </style>
+
+    <style name="TSFont.SemiBold">
+        <item name="fontPath">fonts/TitilliumWeb-SemiBold.ttf</item>
+    </style>
+
+    <style name="TSFont.Black">
+        <item name="fontPath">fonts/TitilliumWeb-Black.ttf</item>
+    </style>
+
+    <style name="TSFont.Italic">
+        <item name="fontPath">fonts/TitilliumWeb-Italic.ttf</item>
+    </style>
+
+    <style name="TSFont.Bold">
+        <item name="fontPath">fonts/TitilliumWeb-Bold.ttf</item>
+    </style>
+
+    <style name="TSFont.SemiBoldItalic">
+        <item name="fontPath">fonts/TitilliumWeb-SemiBoldItalic.ttf</item>
     </style>
 
 </resources>

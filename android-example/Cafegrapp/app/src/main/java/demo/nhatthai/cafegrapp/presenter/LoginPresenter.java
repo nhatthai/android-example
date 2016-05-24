@@ -5,6 +5,13 @@ package demo.nhatthai.cafegrapp.presenter;
  * Interface of Login Presenter Impl
  */
 public interface LoginPresenter {
+    void onUsernameError();
+
+    void onPasswordError();
+
+    void onSuccess();
+
+    void login(String username, String password);
+
     void validateCredentials(String username, String password);
-    void onDestroy();
 }

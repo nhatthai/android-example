@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_below="@+id/imgFeed">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_cafe_grey"
+        android:id="@+id/imgIcon"
+        android:layout_alignBottom="@+id/txtName"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="false"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="20dp"
+        android:layout_below="@+id/txtName"
+        android:layout_toRightOf="@+id/txtName"
+        android:layout_toEndOf="@+id/txtName" />
+
+    <TextView
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Awesome Waffle"
+        android:id="@+id/txtFeedTitle"
+        android:layout_marginLeft="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/imgProfile"
+        android:layout_toEndOf="@+id/imgProfile" />
+
+    <TextView
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Bezin"
+        android:textColor="@color/colorBackground"
+        android:id="@+id/txtName"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/txtFeedTitle"
+        android:layout_toEndOf="@+id/txtFeedTitle"
+        android:layout_gravity="end" />
+
+    <TextView
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="ISPARTAKULE"
+        android:textColor="@color/colorGrey"
+        android:id="@+id/txtCity"
+        android:textIsSelectable="true"
+        android:textSize="10dp"
+        android:layout_below="@+id/txtFeedTitle"
+        android:layout_toRightOf="@+id/txtFeedTitle"
+        android:layout_toEndOf="@+id/txtFeedTitle"
+        android:layout_gravity="end" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtType"
+        android:text="Dessert"
+        android:textSize="8dp"
+        android:drawableLeft="@drawable/ic_heart_border"
+        android:textColor="@color/colorBlack"
+        android:layout_alignBottom="@+id/txtRating"
+        android:layout_alignLeft="@+id/txtFeedTitle"
+        android:layout_alignStart="@+id/txtFeedTitle" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtTimeAgo"
+        android:text="20 minutes"
+        android:textSize="8dp"
+        android:drawableLeft="@drawable/ic_heart_border"
+        android:textColor="@color/colorBlack"
+        android:layout_below="@+id/txtFeedTitle"
+        android:layout_toLeftOf="@+id/txtRating"
+        android:layout_toStartOf="@+id/txtRating" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtRating"
+        android:text="9/10"
+        android:textSize="8dp"
+        android:drawableLeft="@drawable/ic_heart_red"
+        android:textColor="@color/colorBlack"
+        android:layout_below="@+id/txtFeedTitle"
+        android:layout_marginLeft="10dp"
+        android:layout_centerHorizontal="true" />
+</RelativeLayout>
