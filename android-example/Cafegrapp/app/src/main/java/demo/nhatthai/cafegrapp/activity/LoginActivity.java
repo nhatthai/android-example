@@ -1,7 +1,6 @@
 package demo.nhatthai.cafegrapp.activity;
 
 import android.os.Bundle;
-import android.util.Log;
 
 import demo.nhatthai.cafegrapp.R;
 import demo.nhatthai.cafegrapp.fragment.LoginFragment;
@@ -18,16 +17,6 @@ public class LoginActivity extends BaseActivity {
 
         //show/hide Action Bar
         showActionBar(false);
-
-        //add fragment
-        if (savedInstanceState == null) {
-            Log.d("Android", "Add Login Fragment");
-            LoginFragment loginFragment = new LoginFragment();
-            addFragment(R.id.container, loginFragment, "loginFragment");
-        } else {
-            getFragmentManager().findFragmentByTag("loginFragment");
-        }
-
     }
 
 }

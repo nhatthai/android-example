@@ -9,7 +9,8 @@
         android:layout_alignParentTop="true"
         android:layout_width="match_parent"
         android:layout_height="145dp"
-        android:id="@+id/imgFeed"
+        android:id="@+id/img_feed"
+        android:transitionName="@string/transition_imgfeeditem"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:scaleType="centerCrop"
@@ -19,37 +20,28 @@
     <ImageView
         android:layout_width="17dp"
         android:layout_height="17dp"
-        android:id="@+id/imgLike"
+        android:id="@+id/img_like"
         android:layout_alignParentRight="true"
         android:layout_marginRight="15dp"
         android:layout_marginTop="15dp"
         android:tag="heart_border"/>
 
-    <com.mikhaellopez.circularimageview.CircularImageView
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:src="@drawable/daniel_profile"
-        android:id="@+id/imgProfile"
-        app:civ_border_color="#FFFFFF"
-        app:civ_border_width="1dp"
-        app:civ_shadow_radius="10"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="130dp"
-        />
 
     <RelativeLayout
+        android:background="@drawable/bg_feed"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:layout_below="@id/imgFeed">
+        android:layout_below="@id/img_feed">
 
         <TextView
             android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Awesome Waffle"
-            android:id="@+id/txtFeedTitle"
-            style="@style/TSFont"
+            android:id="@+id/txt_feed_title"
+            android:transitionName="@string/transition_title"
+            style="@style/TSFont.SemiBold"
+            android:textColor="@color/colorBlack"
             android:textSize="15dp"
             android:layout_alignParentLeft="true"
             android:layout_marginLeft="70dp"
@@ -59,44 +51,44 @@
         <TextView
             android:layout_width="70dp"
             android:layout_height="20dp"
-            android:id="@+id/txtType"
+            android:id="@+id/txt_type"
             android:text="Dessert"
             android:textSize="9dp"
             style="@style/TSFont.Light"
-            android:layout_below="@id/txtFeedTitle"
+            android:layout_below="@id/txt_feed_title"
             android:layout_marginLeft="70dp"
             android:textColor="@color/colorBlack"/>
 
         <TextView
             android:layout_width="70dp"
             android:layout_height="20dp"
-            android:id="@+id/txtTimeAgo"
+            android:id="@+id/txt_time_ago"
             android:text="20 Minutes"
             style="@style/TSFont.Light"
             android:textSize="9dp"
             android:textColor="@color/colorBlack"
-            android:layout_below="@+id/txtFeedTitle"
-            android:layout_toRightOf="@+id/txtType"
+            android:layout_below="@+id/txt_feed_title"
+            android:layout_toRightOf="@+id/txt_type"
             />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="20dp"
-            android:id="@+id/txtRating"
+            android:id="@+id/txt_rating"
             style="@style/TSFont.Light"
             android:text="9/10"
             android:textSize="9dp"
             android:textColor="@color/colorBlack"
-            android:layout_below="@+id/txtFeedTitle"
-            android:layout_toRightOf="@+id/txtTimeAgo"/>
+            android:layout_below="@+id/txt_feed_title"
+            android:layout_toRightOf="@+id/txt_time_ago"/>
 
 
         <ImageView
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:src="@drawable/ic_cafe_grey"
-            android:id="@+id/imgIcon"
-            android:layout_marginRight="7dp"
+            android:id="@+id/img_icon"
+            android:layout_marginRight="8dp"
             android:layout_alignParentRight="true"
             android:layout_centerInParent="true"
              />
@@ -108,12 +100,12 @@
             android:text="Bezin"
             style="@style/TSFont"
             android:textColor="@color/colorBackground"
-            android:id="@+id/txtName"
-            android:textSize="8dp"
+            android:id="@+id/txt_name"
+            android:textSize="12dp"
             android:gravity="center_vertical|right"
-            android:layout_marginTop="13dp"
-            android:layout_alignRight="@+id/imgIcon"
-            android:layout_marginRight="32dp"
+            android:layout_marginTop="8dp"
+            android:layout_alignRight="@+id/img_icon"
+            android:layout_marginRight="25dp"
             />
 
 
@@ -125,13 +117,26 @@
             style="@style/TSFont"
             android:gravity="center_vertical|right"
             android:textColor="@color/colorGrey"
-            android:id="@+id/txtCity"
+            android:id="@+id/txt_city"
             android:textSize="8dp"
-            android:layout_marginRight="32dp"
-            android:layout_below="@+id/txtName"
-            android:layout_alignRight="@+id/imgIcon"
+            android:layout_marginRight="25dp"
+            android:layout_below="@+id/txt_name"
+            android:layout_alignRight="@+id/img_icon"
             />
 
     </RelativeLayout>
+
+    <com.mikhaellopez.circularimageview.CircularImageView
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:src="@drawable/daniel_profile"
+        android:id="@+id/img_profile"
+        app:civ_border_color="#FFFFFF"
+        app:civ_border_width="1dp"
+        app:civ_shadow_radius="10"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="130dp"
+        />
 
 </RelativeLayout>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".activity.MainActivity" >
+
+    <group android:checkableBehavior="single">
+        <item
+            android:title="" />
+        <item
+            android:title="" />
+        <item
+            android:title="" />
+    </group>
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_feed"
+            android:icon="@drawable/ic_feed_48"
+            android:title="FEED" />
+        <item
+            android:id="@+id/nav_explore"
+            android:icon="@drawable/ic_share_48"
+            android:title="EXPLORE" />
+        <item
+            android:id="@+id/nav_cuisines"
+            android:icon="@drawable/ic_globe_48"
+            android:title="CUISINES" />
+        <item
+            android:id="@+id/nav_message"
+            android:icon="@drawable/ic_email_white_48"
+            android:title="MESSAGES" />
+        <item
+            android:id="@+id/nav_visitcafe"
+            android:icon="@drawable/ic_target_48"
+            android:title="VISIT THE CAFES" />
+
+    </group>
+
+    <item android:title="">
+        <menu>
+            <item
+                android:id="@+id/nav_sign_out"
+                android:icon="@drawable/ic_logout_white"
+                android:title="Sign Out" />
+        </menu>
+    </item>
+
+</menu>

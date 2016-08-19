@@ -3,7 +3,6 @@ package demo.nhatthai.cafegrapp.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,13 +48,7 @@ public class LoginFragment extends BaseFragment implements LoginView, View.OnCli
 
     @Override
     public void onClick(View v) {
-        Log.d("Android", "Click Login");
-        mPresenter.validateCredentials(mEmail.getText().toString(), mPassword.getText().toString());
-    }
-
-    @Override
-    public void showProgress() {
-        mProgressLogin.setVisibility(View.VISIBLE);
+        mPresenter.login(mEmail.getText().toString(), mPassword.getText().toString());
     }
 
     @Override
@@ -64,18 +57,17 @@ public class LoginFragment extends BaseFragment implements LoginView, View.OnCli
     }
 
     @Override
-    public void setUsernameError() {
+    public void showUsernameError() {
         mEmail.setError(getString(R.string.username_error));
     }
 
     @Override
-    public void setPasswordError() {
+    public void showPasswordError() {
         mPassword.setError(getString(R.string.password_error));
     }
 
     @Override
     public void navigateToHome() {
-        Log.d("Android", "Navigation to Home");
         Intent intent = new Intent(getActivity(), MainActivity.class);
         startActivity(intent);
     }

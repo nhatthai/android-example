@@ -1,11 +1,6 @@
 package demo.nhatthai.cafegrapp;
 
 import android.app.Application;
-import android.util.Log;
-
-import demo.nhatthai.cafegrapp.module.ApplicationModule;
-import demo.nhatthai.cafegrapp.component.ApplicationComponent;
-import demo.nhatthai.cafegrapp.component.DaggerApplicationComponent;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
@@ -14,12 +9,9 @@ import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
  */
 public class CafeGrappApplication extends Application {
 
-    private ApplicationComponent applicationComponent;
-
     @Override
     public void onCreate() {
         super.onCreate();
-        this.initializeInjector();
 
         // initalize Calligraphy fonts
         CalligraphyConfig.initDefault(
@@ -29,17 +21,4 @@ public class CafeGrappApplication extends Application {
                         .build()
         );
     }
-
-    private void initializeInjector() {
-        // Dagger%COMPONENT_NAME%
-        this.applicationComponent = DaggerApplicationComponent.builder()
-                .applicationModule(new ApplicationModule(this))
-                .build();
-    }
-
-    public ApplicationComponent getApplicationComponent() {
-        return this.applicationComponent;
-    }
-
-
 }

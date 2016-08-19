@@ -1,0 +1,195 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/profile_layout"
+        android:orientation="horizontal"
+        android:background="@drawable/bg_top_map"
+        android:gravity="center|fill_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+
+        <ImageView android:layout_width="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:src="@drawable/ic_point_large"
+            android:layout_height="match_parent" />
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:gravity="center|left"
+            android:layout_marginLeft="10dp"
+            android:layout_width="190dp"
+            android:layout_height="match_parent">
+
+            <TextView
+                style="@style/TSFont.Light"
+                android:textSize="9dp"
+                android:textColor="@color/colorBlack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="How can I go?" />
+
+            <TextView
+                style="@style/TSFont.Bold"
+                android:textSize="14dp"
+                android:textColor="@color/colorBackground"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="AsNet Company" />
+        </LinearLayout>
+
+        <TextView
+            style="@style/TSFont.Italic"
+            android:textSize="9dp"
+            android:textColor="@color/colorBlack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:text="Or / " />
+
+        <TextView
+            style="@style/TSFont.SemiBold"
+            android:textSize="12dp"
+            android:textColor="@color/colorBlack"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:text="Best cafes nearby" />
+
+
+        <ImageView android:layout_width="wrap_content"
+            android:src="@drawable/ic_arrow_left"
+            android:layout_marginRight="33dp"
+            android:layout_height="match_parent" />
+
+        <ImageView android:layout_width="wrap_content"
+            android:src="@drawable/ic_arrow_right"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+
+    <fragment
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/profile_layout"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:id="@+id/map" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:id="@+id/infos_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+
+        <LinearLayout
+            android:background="@color/colorBgDark"
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_weight="0.40"
+            android:gravity="center|left"
+            android:layout_height="match_parent">
+
+            <TextView
+                style="@style/TSFont.Regular"
+                android:textSize="9dp"
+                android:textColor="@color/colorBlack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:text="Your location"/>
+
+            <TextView
+                style="@style/TSFont.Bold"
+                android:textSize="14dp"
+                android:textColor="@color/colorBlack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:text="Mai Thuc Tram"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:background="@color/colorBackground"
+            android:orientation="horizontal"
+            android:layout_width="0dp"
+            android:layout_weight="0.05"
+            android:layout_height="match_parent">
+
+            <ImageView android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:background="@color/colorBackground"
+            android:orientation="vertical"
+            android:gravity="center|left"
+            android:layout_width="0dp"
+            android:layout_weight="0.40"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/TSFont.Regular"
+                android:textSize="9dp"
+                android:textColor="@color/colorBlack"
+                android:text="Destination"/>
+
+            <TextView
+                style="@style/TSFont.Bold"
+                android:textSize="14dp"
+                android:textColor="@color/colorBlack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="604 Nui Thanh"/>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:background="@color/colorWhite"
+            android:orientation="horizontal"
+            android:layout_width="0dp"
+            android:layout_weight="0.15"
+            android:gravity="center"
+
+            android:layout_height="match_parent">
+
+            <ImageView android:layout_width="wrap_content"
+                android:src="@drawable/ic_clock"
+                android:layout_marginRight="5dp"
+                android:layout_height="match_parent" />
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_marginRight="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+
+                <TextView
+                    style="@style/TSFont.Bold"
+                    android:textSize="14dp"
+                    android:textColor="@color/colorBackground"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="45" />
+
+                <TextView
+                    style="@style/TSFont.Bold"
+                    android:textSize="9dp"
+                    android:textColor="@color/colorBackground"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Min." />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

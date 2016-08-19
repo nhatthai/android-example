@@ -1,95 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_below="@+id/imgFeed">
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    card_view:cardCornerRadius="5dp"
+    card_view:cardUseCompatPadding="true">
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_cafe_grey"
-        android:id="@+id/imgIcon"
-        android:layout_alignBottom="@+id/txtName"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="false"
-        android:layout_marginRight="20dp"
-        android:layout_marginBottom="20dp"
-        android:layout_below="@+id/txtName"
-        android:layout_toRightOf="@+id/txtName"
-        android:layout_toEndOf="@+id/txtName" />
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/img_feed">
 
-    <TextView
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Awesome Waffle"
-        android:id="@+id/txtFeedTitle"
-        android:layout_marginLeft="50dp"
-        android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/imgProfile"
-        android:layout_toEndOf="@+id/imgProfile" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_cafe_grey"
+            android:id="@+id/img_icon"
+            android:layout_alignBottom="@+id/txt_name"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="false"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="20dp"
+            android:layout_below="@+id/txt_name"
+            android:layout_toRightOf="@+id/txt_name"
+            android:layout_toEndOf="@+id/txt_name" />
 
-    <TextView
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Bezin"
-        android:textColor="@color/colorBackground"
-        android:id="@+id/txtName"
-        android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/txtFeedTitle"
-        android:layout_toEndOf="@+id/txtFeedTitle"
-        android:layout_gravity="end" />
+        <TextView
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Awesome Waffle"
+            android:id="@+id/txt_feed_title"
+            android:layout_marginLeft="50dp"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/img_profile"
+            android:layout_toEndOf="@+id/img_profile" />
 
-    <TextView
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="ISPARTAKULE"
-        android:textColor="@color/colorGrey"
-        android:id="@+id/txtCity"
-        android:textIsSelectable="true"
-        android:textSize="10dp"
-        android:layout_below="@+id/txtFeedTitle"
-        android:layout_toRightOf="@+id/txtFeedTitle"
-        android:layout_toEndOf="@+id/txtFeedTitle"
-        android:layout_gravity="end" />
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Bezin"
+            android:textColor="@color/colorBackground"
+            android:id="@+id/txt_name"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/txt_feed_title"
+            android:layout_toEndOf="@+id/txt_feed_title"
+            android:layout_gravity="end" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/txtType"
-        android:text="Dessert"
-        android:textSize="8dp"
-        android:drawableLeft="@drawable/ic_heart_border"
-        android:textColor="@color/colorBlack"
-        android:layout_alignBottom="@+id/txtRating"
-        android:layout_alignLeft="@+id/txtFeedTitle"
-        android:layout_alignStart="@+id/txtFeedTitle" />
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="ISPARTAKULE"
+            android:textColor="@color/colorGrey"
+            android:id="@+id/txt_city"
+            android:textIsSelectable="true"
+            android:textSize="10dp"
+            android:layout_below="@+id/txt_feed_title"
+            android:layout_toRightOf="@+id/txt_feed_title"
+            android:layout_toEndOf="@+id/txt_feed_title"
+            android:layout_gravity="end" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/txtTimeAgo"
-        android:text="20 minutes"
-        android:textSize="8dp"
-        android:drawableLeft="@drawable/ic_heart_border"
-        android:textColor="@color/colorBlack"
-        android:layout_below="@+id/txtFeedTitle"
-        android:layout_toLeftOf="@+id/txtRating"
-        android:layout_toStartOf="@+id/txtRating" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/txt_type"
+            android:text="Dessert"
+            android:textSize="8dp"
+            android:drawableLeft="@drawable/ic_heart_border"
+            android:textColor="@color/colorBlack"
+            android:layout_alignBottom="@+id/txt_rating"
+            android:layout_alignLeft="@+id/txt_feed_title"
+            android:layout_alignStart="@+id/txt_feed_title" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/txtRating"
-        android:text="9/10"
-        android:textSize="8dp"
-        android:drawableLeft="@drawable/ic_heart_red"
-        android:textColor="@color/colorBlack"
-        android:layout_below="@+id/txtFeedTitle"
-        android:layout_marginLeft="10dp"
-        android:layout_centerHorizontal="true" />
-</RelativeLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/txt_time_ago"
+            android:text="20 minutes"
+            android:textSize="8dp"
+            android:drawableLeft="@drawable/ic_heart_border"
+            android:textColor="@color/colorBlack"
+            android:layout_below="@+id/txt_feed_title"
+            android:layout_toLeftOf="@+id/txt_rating"
+            android:layout_toStartOf="@+id/txt_rating" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/txt_rating"
+            android:text="9/10"
+            android:textSize="8dp"
+            android:drawableLeft="@drawable/ic_heart_red"
+            android:textColor="@color/colorBlack"
+            android:layout_below="@+id/txt_feed_title"
+            android:layout_marginLeft="10dp"
+            android:layout_centerHorizontal="true" />
+    </RelativeLayout>
+</android.support.v7.widget.CardView>

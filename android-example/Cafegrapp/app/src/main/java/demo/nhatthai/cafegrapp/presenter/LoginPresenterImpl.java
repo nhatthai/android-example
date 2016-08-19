@@ -1,13 +1,25 @@
 package demo.nhatthai.cafegrapp.presenter;
 
-import android.os.Handler;
 import android.text.TextUtils;
 import android.util.Log;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
 
+import java.io.IOException;
+import java.util.HashMap;
+
+import demo.nhatthai.cafegrapp.service.GeneratorService;
+import demo.nhatthai.cafegrapp.service.LoginService;
+import demo.nhatthai.cafegrapp.settings.Session;
 import demo.nhatthai.cafegrapp.view.LoginView;
+import demo.nhatthai.cafegrapp.utils.ValidateUtil;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 
 /**
  * Created by nhatthai on 5/12/16.
@@ -20,95 +32,101 @@ public class LoginPresenterImpl implements LoginPresenter {
         this.loginView = loginView;
     }
 
-    @Override
-    public void validateCredentials(String username, String password) {
+    private void onUsernameError() {
         if (loginView != null) {
-            loginView.showProgress();
-        }
-
-        login(username, password);
-    }
-
-    @Override
-    public void onUsernameError() {
-        if (loginView != null) {
-            loginView.setUsernameError();
+            loginView.showUsernameError();
             loginView.hideProgress();
         }
     }
 
-    @Override
-    public void onPasswordError() {
+    private void onPasswordError() {
         if (loginView != null) {
-            loginView.setPasswordError();
+            loginView.showPasswordError();
             loginView.hideProgress();
         }
 
     }
-    @Override
-    public void onSuccess() {
+
+    private void onSuccess() {
         if (loginView != null) {
-            Log.d("Android", "Implement Navigation to Home");
             loginView.navigateToHome();
         }
     }
 
     @Override
     public void login(final String username, final String password) {
-        // Mock login. I'm creating a handler to delay the answer a couple of seconds
-        new Handler().postDelayed(new Runnable() {
-            @Override public void run() {
-                boolean isError = false;
+        boolean isError = false;
 
-                // is empty or not valid email then has error
-                if (TextUtils.isEmpty(username) || !isValidEmail(username)){
-                    onUsernameError();
-                    isError = true;
-                }
-
-                // is empty or not valid pass then has error
-                if (TextUtils.isEmpty(password) || !isValidPassword(password)){
-                    onPasswordError();
-                    isError = true;
-                }
-
-                //not error this mean is success
-                if (!isError){
-                    Log.d("Android", "Call success");
-                    onSuccess();
-                }
-            }
-        }, 2000);
-    }
-
-    /**
-     * validating email id
-     * @param email
-     * @return
-     */
-    private boolean isValidEmail(String email) {
-        String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
-                + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
-
-        Pattern pattern = Pattern.compile(EMAIL_PATTERN);
-        Matcher matcher = pattern.matcher(email);
-        return matcher.matches();
-    }
-
-    /**
-     * validating password with retype password
-     * @param pass
-     * @return
-     */
-    private boolean isValidPassword(String pass) {
-        String PASSWORD_PATTERN =
-                "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,20})";
-
-        if (pass != null && pass.length() > 6) {
-            Pattern pattern = Pattern.compile(PASSWORD_PATTERN);
-            Matcher matcher = pattern.matcher(pass);
-            return matcher.matches();
+        // is empty or not valid email then has error
+        if (TextUtils.isEmpty(username) || !ValidateUtil.isValidEmail(username)){
+            onUsernameError();
+            isError = true;
         }
-        return false;
+
+        // is empty or not valid pass then has error
+//        if (TextUtils.isEmpty(password) || !ValidateUtil.isValidPassword(password)){
+//            onPasswordError();
+//            isError = true;
+//        }
+
+        if (!isError) {
+
+            HashMap<String, Object> objMap = new HashMap<>();
+            objMap.put("email", username);
+            objMap.put("username", username);
+            objMap.put("password", password);
+
+            LoginService service =
+                    GeneratorService.createService(LoginService.class, null, null);
+
+            Call<ResponseBody> call = service.doLogin(objMap);
+            call.enqueue(new Callback<ResponseBody>() {
+                @Override
+                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                    if (response.code() == 200) {
+                        try {
+                            String data = response.body().string();
+                            Gson gson = new Gson();
+                            JsonElement json = gson.fromJson(data, JsonElement.class);
+
+                            Session.grappUserId = json.getAsJsonObject().get("id")
+                                    .getAsInt();
+                            Session.username = json.getAsJsonObject().get("username")
+                                    .getAsString();
+                            Session.APIKey = json.getAsJsonObject().get("api_key")
+                                    .getAsString();
+                            Session.firstname = json.getAsJsonObject().get("first_name")
+                                    .getAsString();
+                            Session.lastname = json.getAsJsonObject().get("last_name")
+                                    .getAsString();
+                            Session.email = json.getAsJsonObject().get("email")
+                                    .getAsString();
+                            Session.city = json.getAsJsonObject().get("city")
+                                    .getAsString();
+                            Session.country = json.getAsJsonObject().get("country")
+                                    .getAsString();
+                            Session.recipes = json.getAsJsonObject().get("recipes")
+                                    .getAsString();
+                            Session.follower = json.getAsJsonObject().get("follower")
+                                    .getAsString();
+                            Session.following = json.getAsJsonObject().get("following")
+                                    .getAsString();
+
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        onSuccess();
+                    } else {
+                        Log.v("=======", "Error response: " + response);
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<ResponseBody> call, Throwable t) {
+                    Log.e("Login error:", t.getMessage());
+                }
+            });
+        }
     }
+
 }

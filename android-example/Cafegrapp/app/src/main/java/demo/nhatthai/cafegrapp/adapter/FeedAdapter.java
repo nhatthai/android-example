@@ -3,16 +3,16 @@ package demo.nhatthai.cafegrapp.adapter;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.util.Log;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.support.v7.widget.RecyclerView;
 
 import demo.nhatthai.cafegrapp.R;
 import demo.nhatthai.cafegrapp.model.Feed;
-
 
 /**
  * Created by nhatthai on 5/12/16.
@@ -23,7 +23,11 @@ public class FeedAdapter extends BaseAdapter {
     private OnFeedItemClickListener mListener;
     private Context context;
 
-    public FeedAdapter(Context context, ArrayList<Feed> feeds) {
+    private final int VIEW_TYPE_ITEM = 0;
+    private final int VIEW_TYPE_LOADING = 1;
+    private ViewHolder mViewHolder;
+
+    public FeedAdapter(Context context, List<Feed> feeds) {
         this.feedList = feeds;
         mLayoutInflater = LayoutInflater.from(context);
         this.context = context;
@@ -34,39 +38,63 @@ public class FeedAdapter extends BaseAdapter {
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
-        return new ViewHolder(mLayoutInflater
-                .inflate(R.layout.feed_item, viewGroup, false));
+    public int getItemViewType(int position) {
+        return feedList.get(position) != null ? VIEW_TYPE_ITEM : VIEW_TYPE_LOADING;
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder viewHolder, final int position) {
-        Feed feedItem = feedList.get(position);
-        viewHolder.setData(feedItem.getName(),
-                feedItem.getUsername(), feedItem.getLike(), feedItem.getImageUrl(), context);
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
+        if (viewType == VIEW_TYPE_ITEM) {
+            return new ViewHolder(mLayoutInflater
+                    .inflate(R.layout.feed_item, viewGroup, false));
+        } else if (viewType == VIEW_TYPE_LOADING) {
+            View view = mLayoutInflater.inflate(R.layout.layout_loading_item, viewGroup, false);
+            return new LoadingViewHolder(view);
+        }
+        return null;
+    }
 
-        viewHolder.mImgFeed.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d("Android", "Click item image feed");
+    @Override
+    public void onBindViewHolder(final RecyclerView.ViewHolder viewHolder, final int position) {
+        try {
+            if (viewHolder instanceof ViewHolder) {
+                mViewHolder = (ViewHolder) viewHolder;
+                final Feed feedItem = feedList.get(position);
+                mViewHolder.setData(feedItem.getName(),
+                        feedItem.getUsername(), feedItem.getLike(), feedItem.getImageUrl(),
+                        feedItem.getImgUserUrl(), feedItem.getFoodType(), feedItem.getRating(),
+                        String.valueOf(feedItem.getTime()), context);
+
+                mViewHolder.mImgFeed.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        mListener.onFeedImageClick(feedItem);
+                    }
+                });
+
+                mViewHolder.mImgProfile.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        mListener.onProfileClick(feedItem);
+                    }
+                });
+
+                mViewHolder.mImgLike.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        ImageView mImgLike = (ImageView) mViewHolder.mImgLike;
+                        setImageLike(mImgLike, !mImgLike.getTag().toString().equals("heart_red"));
+                    }
+                });
+
+            } else if (viewHolder instanceof LoadingViewHolder) {
+                LoadingViewHolder loadingViewHolder = (LoadingViewHolder) viewHolder;
+                loadingViewHolder.progressBar.setIndeterminate(true);
             }
-        });
 
-        viewHolder.mImgProfile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mListener.onProfileClick();
-            }
-        });
-
-        viewHolder.mImgLike.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ImageView mImgLike = (ImageView) viewHolder.mImgLike;
-                setImageLike(mImgLike, !mImgLike.getTag().toString().equals("heart_red"));
-            }
-        });
-
+        } catch (IndexOutOfBoundsException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -78,7 +106,8 @@ public class FeedAdapter extends BaseAdapter {
      *
      */
     public interface OnFeedItemClickListener {
-        void onProfileClick();
+        void onProfileClick(Feed feedItem);
+        void onFeedImageClick(Feed feedItem);
         void onLikeClick();
     }
 
@@ -92,6 +121,15 @@ public class FeedAdapter extends BaseAdapter {
         } else {
             mImgLike.setImageResource(R.drawable.ic_heart_border);
             mImgLike.setTag("heart_border");
+        }
+    }
+
+    static class LoadingViewHolder extends RecyclerView.ViewHolder {
+        public ProgressBar progressBar;
+
+        public LoadingViewHolder(View itemView) {
+            super(itemView);
+            progressBar = (ProgressBar) itemView.findViewById(R.id.progress_loading);
         }
     }
 }

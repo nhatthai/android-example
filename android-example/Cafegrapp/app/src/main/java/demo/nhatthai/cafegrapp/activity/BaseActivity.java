@@ -10,6 +10,7 @@ import android.os.PersistableBundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
@@ -36,40 +37,6 @@ public class BaseActivity extends AppCompatActivity {
     }
 
     /**
-     *
-     * @param containerViewId
-     * @param fragment
-     * @param fragmentTag
-     */
-    protected void addFragment(@IdRes int containerViewId,
-                               @NonNull Fragment fragment,
-                               @NonNull String fragmentTag) {
-        getSupportFragmentManager()
-                .beginTransaction()
-                .add(containerViewId, fragment, fragmentTag)
-                .disallowAddToBackStack()
-                .commit();
-    }
-
-    /**
-     *
-     * @param containerViewId
-     * @param fragment
-     * @param fragmentTag
-     * @param backStackStateName
-     */
-    protected void replaceFragment(@IdRes int containerViewId,
-                                   @NonNull Fragment fragment,
-                                   @NonNull String fragmentTag,
-                                   @Nullable String backStackStateName) {
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(containerViewId, fragment, fragmentTag)
-                .addToBackStack(backStackStateName)
-                .commit();
-    }
-
-    /**
      * Show the action bar
      * @param isShow - Show status
      */
@@ -78,6 +45,9 @@ public class BaseActivity extends AppCompatActivity {
         if (actionBar != null) {
             if (isShow) {
                 actionBar.show();
+                actionBar.setHomeButtonEnabled(true);
+                actionBar.setDisplayHomeAsUpEnabled(true);
+                //actionBar.setDisplayShowTitleEnabled(false);
             } else {
                 actionBar.hide();
             }
@@ -89,15 +59,15 @@ public class BaseActivity extends AppCompatActivity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                // API 5+ solution
+                super.onBackPressed();
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                return true;
 
-        //noinspection SimplifiableIfStatement
-//        if (id == R.id.action_settings) {
-//            return true;
-//        }
-
-        return super.onOptionsItemSelected(item);
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
-
-
 }

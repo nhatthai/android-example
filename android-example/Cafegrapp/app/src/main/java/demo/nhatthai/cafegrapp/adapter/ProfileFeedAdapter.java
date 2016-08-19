@@ -1,11 +1,11 @@
 package demo.nhatthai.cafegrapp.adapter;
 
 import android.content.Context;
-import android.util.Log;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.*;
+import android.widget.ImageView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,52 +20,67 @@ public class ProfileFeedAdapter extends BaseAdapter {
     private LayoutInflater mLayoutInflater;
     private List<Feed> feedList = new ArrayList<>();
     private OnFeedItemClickListener mListener;
-    private Context context;
+    private Context mContext;
+
+    private final int VIEW_TYPE_ITEM = 0;
+    private final int VIEW_TYPE_LOADING = 1;
+    private BaseAdapter.ViewHolder mViewHolder;
+
     public ProfileFeedAdapter(Context context, ArrayList<Feed> feeds) {
         this.feedList = feeds;
-        Log.d("Android", "Profile Feed" + feedList.size());
         mLayoutInflater = LayoutInflater.from(context);
-        this.context = context;
+        this.mContext = context;
     }
 
     public void setOnFeedItemClickListener(OnFeedItemClickListener listener) {
         this.mListener = listener;
     }
 
+    @Override
+    public int getItemViewType(int position) {
+        return feedList.get(position) != null ? VIEW_TYPE_ITEM : VIEW_TYPE_LOADING;
+    }
+
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
-        return new ViewHolder(mLayoutInflater.inflate(R.layout.profile_feed_item, viewGroup, false));
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
+        if (viewType == VIEW_TYPE_ITEM) {
+            return new ViewHolder(mLayoutInflater
+                    .inflate(R.layout.profile_feed_item, viewGroup, false));
+        } else if (viewType == VIEW_TYPE_LOADING) {
+            View view = mLayoutInflater.inflate(R.layout.layout_loading_item, viewGroup, false);
+            return new FeedAdapter.LoadingViewHolder(view);
+        }
+        return null;
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder viewHolder, final int position) {
-        Feed feedItem = feedList.get(position);
-        viewHolder.setData(feedItem.getName(),
-                feedItem.getUsername(), feedItem.getLike(), feedItem.getImageUrl(), context);
+    public void onBindViewHolder(final RecyclerView.ViewHolder viewHolder, final int position) {
+        final Feed feedItem = feedList.get(position);
 
-        viewHolder.mImgFeed.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d("Android", "Click item image feed");
-            }
-        });
-//
-//        viewHolder.mImgProfile.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                mListener.onProfileClick();
-//            }
-//        });
+        if (viewHolder instanceof BaseAdapter.ViewHolder) {
+            mViewHolder = (ViewHolder) viewHolder;
 
-        viewHolder.mImgLike.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ImageView mImgLike = (ImageView) viewHolder.mImgLike;
-                setImageLike(mImgLike, !mImgLike.getTag().toString().equals("heart_red"));
-            }
-        });
+            mViewHolder.setData(feedItem.getName(),
+                    feedItem.getUsername(), feedItem.getLike(), feedItem.getImageUrl(),
+                    "", feedItem.getFoodType(), feedItem.getRating(),
+                    String.valueOf(feedItem.getTime()), mContext);
 
+            mViewHolder.mImgFeed.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mListener.onFeedImageClick(feedItem);
+                }
+            });
+
+            mViewHolder.mImgLike.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ImageView mImgLike = (ImageView) mViewHolder.mImgLike;
+                    setImageLike(mImgLike, !mImgLike.getTag().toString().equals("heart_red"));
+                }
+            });
+        }
     }
 
     @Override
@@ -77,8 +92,7 @@ public class ProfileFeedAdapter extends BaseAdapter {
      *
      */
     public interface OnFeedItemClickListener {
-        void onProfileClick();
-        void onLikeClick();
+        void onFeedImageClick(Feed feedItem);
     }
 
     /*

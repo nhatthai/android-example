@@ -2,11 +2,9 @@ package demo.nhatthai.cafegrapp.component;
 
 import android.app.Application;
 
-import demo.nhatthai.cafegrapp.CafeGrappApplication;
 import demo.nhatthai.cafegrapp.module.ApplicationModule;
 
 import javax.inject.Singleton;
-
 import dagger.Component;
 
 
@@ -18,5 +16,4 @@ import dagger.Component;
 public interface ApplicationComponent {
 
     Application application();
-    CafeGrappApplication cafeGrappApplication();
 }
